@@ -146,6 +146,7 @@ else
 
   -- Vim-maximizer
   keymap("n", "<leader>sm", ":MaximizerToggle<CR>", opts) -- toggle maximize tab
+  keymap("n", "<leader>sM", ":MaximizerToggle!<CR>", opts) -- toggle maximize tab
 
   -- Nvim-tree
   keymap("n", "<leader>ee", ":NvimTreeToggle<CR>", opts) -- toggle file explore, optsr
