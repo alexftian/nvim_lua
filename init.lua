@@ -72,17 +72,6 @@ else
  -- These modules are not loaded by lazy
   --
   require("core.options")
- -- LSP setup
-  require('lspconfig').setup()
-
-  
-  -- Other plugins not needed in VSCode
-  require('treesitter').setup()
-  require('telescope').setup()
-  -- ... other configurations require("core.keymaps")
-
-  -- Enable system clipboard
-  vim.opq.clipboard = "unnamedplus"
 
   -- Incremental search and highlight search
   vim.opt.incsearch = true
