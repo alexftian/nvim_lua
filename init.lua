@@ -57,12 +57,24 @@ if vim.g.vscode then
   map("n", "th", ":tabp<CR>", { silent = true })
   map("n", "tl", ":tabn<CR>", { silent = true })
 
-  -- Switch between editor groups
-  map("n", "tH", function() vscode.call("workbench.action.focusLeftGroup") end, { silent = true })
-  map("n", "tL", function() vscode.call("workbench.action.focusRightGroup") end, { silent = true })
-  map("n", "tK", function() vscode.call("workbench.action.focusAboveGroup") end, { silent = true })
-  map("n", "tJ", function() vscode.call("workbench.action.focusBelowGroup") end, { silent = true })
+  -- Vim-maximizer
+  map("n", "<leader>sm", function() vscode.call("workbench.action.toggleMaximizeEditorGroup") end, { silent = true })
+  map("n", "<leader>sM", function() vscode.call("workbench.action.toggleMaximizeEditorGroup") end, { silent = true })
 
+  -- Split window management
+  map("n", "<leader>sv", function() vscode.call("workbench.action.splitEditorRight") end, { silent = true })
+  map("n", "<leader>sh", function() vscode.call("workbench.action.splitEditorDown") end, { silent = true })
+  map("n", "<leader>se", function() vscode.call("workbench.action.evenEditorWidths") end, { silent = true })
+  map("n", "<leader>sx", function() vscode.call("workbench.action.closeActiveEditor") end, { silent = true })
+  map("n", "<leader>sj", function() vscode.call("workbench.action.decreaseViewHeight") end, { silent = true })
+  map("n", "<leader>sk", function() vscode.call("workbench.action.increaseViewHeight") end, { silent = true })
+  map("n", "<leader>sl", function() vscode.call("workbench.action.increaseViewWidth") end, { silent = true })
+  map("n", "<leader>sh", function() vscode.call("workbench.action.decreaseViewWidth") end, { silent = true })
+
+  -- Tab management
+  map("n", "<leader>tx", function() vscode.call("workbench.action.closeActiveEditor") end, { silent = true })
+  map("n", "<leader>tn", function() vscode.call("workbench.action.nextEditor") end, { silent = true })
+  map("n", "<leader>tp", function() vscode.call("workbench.action.previousEditor") end, { silent = true })
 
   map("v", ">", ":<C-u>execute 'editor.action.indentLines'<CR>", { silent = true })
   map("v", "<", ":<C-u>execute 'editor.action.outdentLines'<CR>", { silent = true })
@@ -108,13 +120,6 @@ else
   --
   keymap("n", "th", ":tabprevious<CR>", opts)
   keymap("n", "tl", ":tabnext<CR>", opts)
-
-  -- Window (editor group) navigation
-  keymap("n", "tH", "<C-w>h", opts)  -- Move to the left window
-  keymap("n", "tL", "<C-w>l", opts)  -- Move to the right window
-  keymap("n", "tK", "<C-w>k", opts)  -- Move to the upper window
-  keymap("n", "tJ", "<C-w>j", opts)  -- Move to the lower window
-  keymap("n", "<leader>sm", ":MaximizerToggle<CR>", opts) -- toggle maximize tab
 
   -- Visual mode keybindings
   keymap("v", ">", ">gv", opts)  -- Indent and stay in visual mode
