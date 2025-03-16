@@ -1,5 +1,6 @@
 -- Bootstrap lazy
 vim.g.mapleader = " "
+vim.keymap.set({"n", "v"}, "<Space>", "<Nop>", { silent = true })
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -16,6 +17,9 @@ vim.opt.rtp:prepend(lazypath)
 
 -- This has to be set before initializing lazy
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+-- Disable the default space behavior
+vim.keymap.set({"n", "v"}, "<Space>", "<Nop>", { silent = true })
 
 
 -- Initialize lazy with dynamic loading of anything in the plugins directory
@@ -59,11 +63,6 @@ if vim.g.vscode then
   map("n", "tK", function() vscode.call("workbench.action.focusAboveGroup") end, { silent = true })
   map("n", "tJ", function() vscode.call("workbench.action.focusBelowGroup") end, { silent = true })
 
-  -- Leader key mappings
-  map("n", "<leader>s", "<leader><leader>s", { remap = true })
-  map("n", "<leader>e", "<leader><leader>e", { remap = true })
-  map("n", "<leader>w", "<leader><leader>w", { remap = true })
-  map("n", "<leader>l", "<leader><leader>l", { remap = true })
 
   map("v", ">", ":<C-u>execute 'editor.action.indentLines'<CR>", { silent = true })
   map("v", "<", ":<C-u>execute 'editor.action.outdentLines'<CR>", { silent = true })
@@ -115,8 +114,110 @@ else
   keymap("n", "tL", "<C-w>l", opts)  -- Move to the right window
   keymap("n", "tK", "<C-w>k", opts)  -- Move to the upper window
   keymap("n", "tJ", "<C-w>j", opts)  -- Move to the lower window
+  keymap("n", "<leader>sm", ":MaximizerToggle<CR>", opts) -- toggle maximize tab
 
   -- Visual mode keybindings
   keymap("v", ">", ">gv", opts)  -- Indent and stay in visual mode
   keymap("v", "<", "<gv", opts)  -- Outdent and stay in visual mode
+
+  -- Split window management
+  keymap("n", "<leader>sv", "<C-w>v", opts) -- split window vertically
+  keymap("n", "<leader>sh", "<C-w>s", opts) -- split window horizontally
+  keymap("n", "<leader>se", "<C-w>=", opts) -- make split windows equal width
+  keymap("n", "<leader>sx", ":close<CR>", opts) -- close split window
+  keymap("n", "<leader>sj", "<C-w>-", opts) -- make split window height shorter
+  keymap("n", "<leader>sk", "<C-w>+", opts) -- make split windows height taller
+  keymap("n", "<leader>sl", "<C-w>>5", opts) -- make split windows width bigger 
+  keymap("n", "<leader>sh", "<C-w><5", opts) -- make split windows width smaller
+
+  -- Tab management
+  keymap("n", "<leader>to", ":tabnew<CR>", opts) -- open a new tab
+  keymap("n", "<leader>tx", ":tabclose<CR>", opts) -- close a tab
+  keymap("n", "<leader>tn", ":tabn<CR>", opts) -- next tab
+  keymap("n", "<leader>tp", ":tabp<CR>", opts) -- previous tab
+
+  -- Quickfix keymaps
+  keymap("n", "<leader>qo", ":copen<CR>", opts) -- open quickfix list
+  keymap("n", "<leader>qf", ":cfirst<CR>", opts) -- jump to first quickfix list item
+  keymap("n", "<leader>qn", ":cnext<CR>", opts) -- jump to next quickfix list item
+  keymap("n", "<leader>qp", ":cprev<CR>", opts) -- jump to prev quickfix list item
+  keymap("n", "<leader>ql", ":clast<CR>", opts) -- jump to last quickfix list item
+  keymap("n", "<leader>qc", ":cclose<CR>", opts) -- close quickfix list
+
+  -- Vim-maximizer
+  keymap("n", "<leader>sm", ":MaximizerToggle<CR>", opts) -- toggle maximize tab
+
+  -- Nvim-tree
+  keymap("n", "<leader>ee", ":NvimTreeToggle<CR>", opts) -- toggle file explore, optsr
+  keymap("n", "<leader>er", ":NvimTreeFocus<CR>", opts) -- toggle focus to file explore, optsr
+  keymap("n", "<leader>ef", ":NvimTreeFindFile<CR>", opts) -- find file in file explore, optsr
+
+  -- Telescope
+  keymap('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<CR>", opts) -- fuzzy find files in project
+  keymap('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<CR>", opts) -- grep file contents in project
+  keymap('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<CR>", opts) -- fuzzy find open buffers
+  keymap('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<CR>", opts) -- fuzzy find help tags
+  keymap('n', '<leader>fs', "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", opts) -- fuzzy find in current file buffer
+  keymap('n', '<leader>fo', "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", opts) -- fuzzy find LSP/class symbols
+  keymap('n', '<leader>fi', "<cmd>lua require('telescope.builtin').lsp_incoming_calls()<CR>", opts) -- fuzzy find LSP/incoming calls
+  -- keymap.set('n', '<leader>fm', function() require('telescope.builtin').treesitter({default_text=":method:"}) end) -- fuzzy find methods in current class
+  keymap('n', '<leader>fm', "<cmd>lua require('telescope.builtin').treesitter({symbols={'function', 'method'}})<CR>", opts) -- fuzzy find methods in current class
+  keymap('n', '<leader>ft', [[<cmd>lua 
+    local success, node = pcall(function() return require('nvim-tree.lib').get_node_at_cursor() end)
+    if not success or not node then return end;
+    require('telescope.builtin').live_grep({search_dirs = {node.absolute_path}})
+  <CR>]], opts) -- grep file contents in current nvim-tree node
+
+  -- Harpoon
+  keymap("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<CR>", opts)
+  keymap("n", "<leader>hh", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
+  keymap("n", "<leader>h1", "<cmd>lua require('harpoon.ui').nav_file(1)<CR>", opts)
+  keymap("n", "<leader>h2", "<cmd>lua require('harpoon.ui').nav_file(2)<CR>", opts)
+  keymap("n", "<leader>h3", "<cmd>lua require('harpoon.ui').nav_file(3)<CR>", opts)
+  keymap("n", "<leader>h4", "<cmd>lua require('harpoon.ui').nav_file(4)<CR>", opts)
+  keymap("n", "<leader>h5", "<cmd>lua require('harpoon.ui').nav_file(5)<CR>", opts)
+  keymap("n", "<leader>h6", "<cmd>lua require('harpoon.ui').nav_file(6)<CR>", opts)
+  keymap("n", "<leader>h7", "<cmd>lua require('harpoon.ui').nav_file(7)<CR>", opts)
+  keymap("n", "<leader>h8", "<cmd>lua require('harpoon.ui').nav_file(8)<CR>", opts)
+  keymap("n", "<leader>h9", "<cmd>lua require('harpoon.ui').nav_file(9)<CR>", opts)
+
+  -- Vim REST Console
+  keymap("n", "<leader>xr", ":call VrcQuery()<CR>", opts) -- Run REST query
+
+  -- LSP
+  keymap('n', '<leader>gg', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  keymap('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  keymap('n', '<leader>gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  keymap('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  keymap('n', '<leader>gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  keymap('n', '<leader>gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  keymap('n', '<leader>rr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  keymap('n', '<leader>gf', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
+  keymap('v', '<leader>gf', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
+  keymap('n', '<leader>ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  keymap('n', '<leader>gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  keymap('n', '<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  keymap('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  keymap('n', '<leader>tr', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
+  keymap('i', '<C-Space>', '<cmd>lua vim.lsp.buf.completion()<CR>', opts)
+  -- Debugging
+  keymap("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
+  keymap("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", opts)
+  keymap("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", opts)
+  keymap("n", '<leader>br', "<cmd>lua require'dap'.clear_breakpoints()<cr>", opts)
+  keymap("n", '<leader>ba', '<cmd>Telescope dap list_breakpoints<cr>', opts)
+  keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
+  keymap("n", "<leader>dj", "<cmd>lua require'dap'.step_over()<cr>", opts)
+  keymap("n", "<leader>dk", "<cmd>lua require'dap'.step_into()<cr>", opts)
+  keymap("n", "<leader>do", "<cmd>lua require'dap'.step_out()<cr>", opts)
+  keymap("n", '<leader>dd', "<cmd>lua require('dap').disconnect(); require('dapui').close()<CR>", opts)
+  keymap("n", '<leader>dt', "<cmd>lua require('dap').terminate(); require('dapui').close()<CR>", opts)
+  keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
+  keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
+  keymap("n", '<leader>di', "<cmd>lua require('dap.ui.widgets').hover()<CR>", opts)
+  keymap("n", '<leader>d?', "<cmd>lua local widgets = require('dap.ui.widgets'); widgets.centered_float(widgets.scopes)<CR>", opts)
+  keymap("n", '<leader>df', '<cmd>Telescope dap frames<cr>', opts)
+  keymap("n", '<leader>dh', '<cmd>Telescope dap commands<cr>', opts)
+  keymap("n", '<leader>de', "<cmd>lua require('telescope.builtin').diagnostics({default_text=':E:'})<CR>", opts)
 end
