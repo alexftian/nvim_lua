@@ -69,15 +69,18 @@ if vim.g.vscode then
   map("n", "<leader>sj", function() vscode.call("workbench.action.decreaseViewHeight") end, { silent = true })
   map("n", "<leader>sk", function() vscode.call("workbench.action.increaseViewHeight") end, { silent = true })
   map("n", "<leader>sl", function() vscode.call("workbench.action.increaseViewWidth") end, { silent = true })
-  map("n", "<leader>sh", function() vscode.call("workbench.action.decreaseViewWidth") end, { silent = true })
 
   -- Tab management
   map("n", "<leader>tx", function() vscode.call("workbench.action.closeActiveEditor") end, { silent = true })
+  map("n", "<leader>tg", function() vscode.call("workbench.action.splitEditor") end, { silent = true })
   map("n", "<leader>tn", function() vscode.call("workbench.action.nextEditor") end, { silent = true })
   map("n", "<leader>tp", function() vscode.call("workbench.action.previousEditor") end, { silent = true })
 
-  map("v", ">", ":<C-u>execute 'editor.action.indentLines'<CR>", { silent = true })
-  map("v", "<", ":<C-u>execute 'editor.action.outdentLines'<CR>", { silent = true })
+  -- Map '>' in visual mode to indent lines
+  map('v', '>', function()  vscode.call('editor.action.indentLines') end, { silent = true })
+  
+  -- Map '<' in visual mode to outdent lines  
+  map('v', '<', function() vscode.call('editor.action.outdentLines') end, { silent = true })
 
 else
  -- These modules are not loaded by lazy
@@ -96,19 +99,12 @@ else
 
   -- jj to exit insert mode
   vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = true, silent = true })
-
   -- Insert mode: <C-o> to create a new line and enter insert mode
   vim.api.nvim_set_keymap("i", "<C-o>", "<Esc>o", { noremap = true, silent = true })
 
   -- Normal mode keybindings (non-recursive)
   local keymap = vim.api.nvim_set_keymap
   local opts = { noremap = true, silent = true }
-
-  -- Go to references (VSCode equivalent)
-  keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-
-  -- Trigger parameter hints (LSP)
-  keymap("n", "gp", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 
   -- Rename symbol
   keymap("n", "R", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
