@@ -26,25 +26,20 @@ vim.keymap.set({"n", "v"}, "<Space>", "<Nop>", { silent = true })
 if vim.g.vscode then
   -- In VSCode, only load leap and treesitter plugins
   require("lazy").setup({
-  { "windwp/nvim-autopairs" },
-  { "kylechui/nvim-surround" },
-  { "tpope/vim-commentary" },
-  { "szw/vim-maximizer" },
-  { "echasnovski/mini.ai" },
-  { "lukas-reineke/indent-blankline.nvim" },
-  { 
-    "ThePrimeagen/harpoon",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-  },
-}, {
+     { "ggandor/leap.nvim" },
+    { "windwp/nvim-autopairs" },
+    { "kylechui/nvim-surround" },
+    { "tpope/vim-commentary" },
+    { "szw/vim-maximizer" },
+    { "echasnovski/mini.ai" },
+    { "lukas-reineke/indent-blankline.nvim" },
+    }, {
     change_detection = {
       enabled = true,
       notify = false,
     },
   })
-else
+else 
   -- In regular Neovim, load all plugins
   require("lazy").setup("plugins", {
     change_detection = {
