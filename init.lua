@@ -22,13 +22,37 @@ vim.g.maplocalleader = " "
 vim.keymap.set({"n", "v"}, "<Space>", "<Nop>", { silent = true })
 
 
--- Initialize lazy with dynamic loading of anything in the plugins directory
-require("lazy").setup("plugins", {
-   change_detection = {
-    enabled = true, -- automatically check for config file changes and reload the ui
-    notify = false, -- turn off notifications whenever plugin changes are made
+-- Initialize lazy with dynamic loading of filtered plugins based on environment
+if vim.g.vscode then
+  -- In VSCode, only load leap and treesitter plugins
+  require("lazy").setup({
+  { "windwp/nvim-autopairs" },
+  { "kylechui/nvim-surround" },
+  { "tpope/vim-commentary" },
+  { "szw/vim-maximizer" },
+  { "echasnovski/mini.ai" },
+  { "lukas-reineke/indent-blankline.nvim" },
+  { 
+    "ThePrimeagen/harpoon",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
   },
-})
+}, {
+    change_detection = {
+      enabled = true,
+      notify = false,
+    },
+  })
+else
+  -- In regular Neovim, load all plugins
+  require("lazy").setup("plugins", {
+    change_detection = {
+      enabled = true, -- automatically check for config file changes and reload the ui
+      notify = false, -- turn off notifications whenever plugin changes are made
+    },
+  })
+end
 -- Load VSCode keymaps if running in VSCode
 if vim.g.vscode then
   -- VSCode extension
