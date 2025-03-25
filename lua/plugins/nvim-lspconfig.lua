@@ -24,16 +24,17 @@ return {
     require('mason-lspconfig').setup({
       -- Install these LSPs automatically
       ensure_installed = {
-        -- 'bashls', -- requires npm to be installed
-        -- 'cssls', -- requires npm to be installed
-        -- 'html', -- requires npm to be installed
+        'bashls', -- requires npm to be installed
+        'cssls', -- requires npm to be installed
+        'html', -- requires npm to be installed
         'lua_ls',
-        -- 'jsonls', -- requires npm to be installed
+        'jsonls', -- requires npm to be installed
         'lemminx',
         'marksman',
+        'pyright', -- Python LSP
         'quick_lint_js',
-        -- 'tsserver', -- requires npm to be installed
-        -- 'yamlls', -- requires npm to be installed
+        'tsserver', -- requires npm to be installed
+        'yamlls', -- requires npm to be installed
       }
     })
 
@@ -60,6 +61,47 @@ return {
           diagnostics = {
             -- Get the language server to recognize the `vim` global
             globals = {'vim'},
+          },
+        },
+      },
+    }
+    
+    -- Python LSP settings
+    lspconfig.pyright.setup {
+      settings = {
+        python = {
+          analysis = {
+            autoSearchPaths = true,
+            useLibraryCodeForTypes = true,
+            diagnosticMode = "workspace",
+          },
+        },
+      },
+    }
+    
+    -- TypeScript LSP settings
+    lspconfig.tsserver.setup {
+      settings = {
+        typescript = {
+          inlayHints = {
+            includeInlayParameterNameHints = "all",
+            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayVariableTypeHints = true,
+            includeInlayPropertyDeclarationTypeHints = true,
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayEnumMemberValueHints = true,
+          },
+        },
+        javascript = {
+          inlayHints = {
+            includeInlayParameterNameHints = "all",
+            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayVariableTypeHints = true,
+            includeInlayPropertyDeclarationTypeHints = true,
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayEnumMemberValueHints = true,
           },
         },
       },

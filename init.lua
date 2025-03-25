@@ -78,7 +78,6 @@ if vim.g.vscode then
 
   -- Vim-maximizer
   map("n", "<leader>sm", function() vscode.call("workbench.action.toggleMaximizeEditorGroup") end, { silent = true })
-  map("n", "<leader>sM", function() vscode.call("workbench.action.toggleMaximizeEditorGroup") end, { silent = true })
 
   -- Split window management
   map("n", "<leader>sv", function() vscode.call("workbench.action.splitEditorRight") end, { silent = true })
@@ -166,7 +165,7 @@ else
 
   -- Vim-maximizer
   keymap("n", "<leader>sm", ":MaximizerToggle<CR>", opts) -- toggle maximize tab
-  keymap("n", "<leader>sM", ":MaximizerToggle!<CR>", opts) -- toggle maximize tab
+  -- keymap("n", "<leader>sM", ":MaximizerToggle!<CR>", opts) -- toggle maximize tab
 
   -- Nvim-tree
   keymap("n", "<leader>ee", ":NvimTreeToggle<CR>", opts) -- toggle file explore, optsr

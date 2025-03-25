@@ -105,6 +105,13 @@ keymap.set('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 keymap.set('n', '<leader>tr', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
 keymap.set('i', '<C-Space>', '<cmd>lua vim.lsp.buf.completion()<CR>')
 
+-- Terminal commands
+keymap.set("n", "<leader>tt", ":split | terminal<CR>", { desc = "Open terminal in horizontal split" })
+keymap.set("n", "<leader>tv", ":vsplit | terminal<CR>", { desc = "Open terminal in vertical split" })
+keymap.set("n", "<leader>tf", ":terminal<CR>", { desc = "Open terminal in current buffer" })
+keymap.set("n", "<leader>tr", ":split | terminal cd %:p:h && ", { desc = "Run command in file directory" })
+keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
 -- Debugging
 keymap.set("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
 keymap.set("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>")
