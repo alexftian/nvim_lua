@@ -31,7 +31,12 @@ if vim.g.vscode then
     { "kylechui/nvim-surround" },
     { "tpope/vim-commentary" },
     { "szw/vim-maximizer" },
-    { "echasnovski/mini.ai" },
+    { 
+      "echasnovski/mini.ai",
+      config = function()
+        require("mini.ai").setup()
+      end
+    },
     { "lukas-reineke/indent-blankline.nvim" },
     }, {
     change_detection = {
@@ -99,6 +104,13 @@ if vim.g.vscode then
   
   -- Map '<' in visual mode to outdent lines  
   map('v', '<', function() vscode.call('editor.action.outdentLines') end, { silent = true })
+
+  -- LSP features in VSCode
+  map("n", "<leader>gg", function() vscode.call("editor.action.showHover") end, { silent = true })
+  map("n", "<leader>gd", function() vscode.call("editor.action.revealDefinition") end, { silent = true })
+  map("n", "<leader>gD", function() vscode.call("editor.action.revealDeclaration") end, { silent = true })
+  map("n", "<leader>gi", function() vscode.call("editor.action.goToImplementation") end, { silent = true })
+  map("n", "<leader>gt", function() vscode.call("editor.action.goToTypeDefinition") end, { silent = true })
 
 else
  -- These modules are not loaded by lazy
