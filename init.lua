@@ -57,6 +57,9 @@ end
 if vim.g.vscode then
   -- VSCode extension
   local vscode = require("vscode-neovim")
+  
+  -- Enable Leap.nvim in VSCode
+  require('leap').add_default_mappings()
 
   vim.api.nvim_set_hl(0, "LeapTarget", { fg = "Orange", bg = "DarkBlue", bold = true })
   vim.api.nvim_set_hl(0, "LeapCharacter", { fg = "Yellow", bg = "DarkRed", bold = true })
