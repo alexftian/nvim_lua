@@ -1,0 +1,111 @@
+// Place your settings in this file to overwrite the default settings
+
+{
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "vscode-neovim.compositeKeys": {
+    "jj": {
+      "command": "vscode-neovim.escape"
+    }
+  },
+  "terminal.integrated.allowChords": false,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "java.jdt.ls.vmargs": "-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication -javaagent:\"/Users/ftian/.vscode/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.classpath": true,
+    "**/.factorypath": true,
+    "**/.project": true,
+    "**/.settings": true
+  },
+  "go.formatTool": "goimports",
+  "go.gopath": "/Users/ftian/go/",
+  "go.inferGopath": true,
+  "gitlens.advanced.messages": {
+    "suppressGitDisabledWarning": true,
+    "suppressGitMissingWarning": true,
+    "suppressGitVersionWarning": true
+  },
+  "explorer.confirmDelete": false,
+  "workbench.colorTheme": "Solarized Light",
+  "editor.multiCursorModifier": "alt",
+  "git.autorefresh": false,
+  "editor.detectIndentation": false,
+  "bashBeautify.tabSize": 2,
+  "python.languageServer": "Pylance",
+  "files.watcherExclude": {
+    "**/.bloop": true,
+    "**/.metals": true,
+    "**/.ammonite": true
+  },
+  "projectManager.git.baseFolders": ["~/workspace/source"],
+  "workbench.iconTheme": "vscode-icons",
+  "vsicons.presets.hideFolders": true,
+  "files.associations": {
+    "*.aur": "python",
+    "README": "markdown",
+    "*.workflow": "json",
+    "*.err": "json"
+  },
+  "vsicons.dontShowNewVersionMessage": true,
+  "terminal.integrated.copyOnSelection": true,
+  "on.schemas": [],
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false,
+    "yaml": false
+  },
+  "editor.unicodeHighlight.invisibleCharacters": false,
+  "terminal.integrated.inheritEnv": false,
+  "editor.fontSize": 15,
+  "eslint.run": "onSave",
+  "files.autoSave": "onFocusChange",
+  "workbench.activityBar.location": "top",
+  "editor.minimap.enabled": false,
+  "terminal.integrated.env.osx": {},
+  "black-formatter.args": ["--line-length", "110"],
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true
+  },
+  "git.confirmSync": false,
+  "editor.lineNumbers": "relative",
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.editor.enableAutoCompletions": true,
+  "chat.agent.enabled": true,
+  "chat.agent.maxRequests": 15,
+  "security.workspace.trust.untrustedFiles": "open",
+  "editor.inineSuggest.edits.renderSideBySide": "auto",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "console-ninja.featureSet": "Community",
+  "leetcode.hint.configWebviewMarkdown": false,
+  "leetcode.workspaceFolder": "/Users/fengtian/.leetcode",
+  "leetcode.defaultLanguage": "python3",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.editor.editorActionsLocation": "titleBar",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "python.defaultInterpreterPath": "/opt/homebrew/Cellar/python@3.12/3.12.3/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+  "git.openRepositoryInParentFolders": "never",
+  "python.analysis.autoFormatStrings": true,
+  "python.analysis.inlayHints.callArgumentNames": "partial",
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.typeCheckingMode": "standard",
+  "errorLens.delayMode": "debounce",
+  "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "update.mode": "none",
+  "vscode-neovim.highlightGroups.highlights": {
+    "LeapMatch": { "backgroundColor": "#49483E", "color": "#F8F8F2" },
+    "LeapLabelPrimary": { "backgroundColor": "#E6DB74", "color": "#272822" },
+    "LeapLabelSecondary": { "backgroundColor": "#FD971F", "color": "#272822" }
+  }
+}
