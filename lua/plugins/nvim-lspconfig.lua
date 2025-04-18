@@ -33,7 +33,7 @@ return {
         'marksman',
         'pyright', -- Python LSP
         'quick_lint_js',
-        'tsserver', -- requires npm to be installed
+        'typescript-language-server', -- for ts_ls, requires npm to be installed
         'yamlls', -- requires npm to be installed
       }
     })
@@ -80,7 +80,8 @@ return {
     }
     
     -- TypeScript LSP settings
-    lspconfig.tsserver.setup {
+    -- Use typescript-language-server (ts_ls) instead of tsserver (deprecated)
+    lspconfig.typescript.setup {
       settings = {
         typescript = {
           inlayHints = {
