@@ -14,6 +14,19 @@ return {
         },
       }
     },
+    renderer = {
+      icons = {
+        show = {
+          git = true,
+          folder = true,
+          file = true,
+          folder_arrow = true,
+        },
+      },
+    },
+    filters = {
+      dotfiles = false, -- Show hidden files
+    },
   },
   config = function (_, opts)
     -- Recommended settings to disable default netrw file explorer

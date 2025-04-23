@@ -255,4 +255,19 @@ else
   keymap("n", '<leader>df', '<cmd>Telescope dap frames<cr>', opts)
   keymap("n", '<leader>dh', '<cmd>Telescope dap commands<cr>', opts)
   keymap("n", '<leader>de', "<cmd>lua require('telescope.builtin').diagnostics({default_text=':E:'})<CR>", opts)
+
+  -- Terminal mode
+  keymap("t", "<Esc>", "<C-\\><C-n>", opts)
+  keymap("t", "<A-h>", "<C-\\><C-N><C-w>h", opts)
+  keymap("t", "<A-j>", "<C-\\><C-N><C-w>j", opts)
+  keymap("t", "<A-k>", "<C-\\><C-N><C-w>k", opts)
+  keymap("t", "<A-l>", "<C-\\><C-N><C-w>l", opts)
+  keymap("i", "<A-h>", "<C-\\><C-N><C-w>h", opts)
+  keymap("i", "<A-j>", "<C-\\><C-N><C-w>j", opts)
+  keymap("i", "<A-k>", "<C-\\><C-N><C-w>k", opts)
+  keymap("i", "<A-l>", "<C-\\><C-N><C-w>l", opts)
+  keymap("n", "<A-h>", "<C-w>h", opts)
+  keymap("n", "<A-j>", "<C-w>j", opts)
+  keymap("n", "<A-k>", "<C-w>k", opts)
+  keymap("n", "<A-l>", "<C-w>l", opts)
 end
