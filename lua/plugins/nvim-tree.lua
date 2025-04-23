@@ -26,6 +26,8 @@ return {
     },
     filters = {
       dotfiles = false, -- Show hidden files
+      custom = { "^.git$" }, -- Hide .git directory
+      exclude = { ".env" }, -- Explicitly show .env files
     },
   },
   config = function (_, opts)
