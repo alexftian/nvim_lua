@@ -26,17 +26,11 @@ vim.keymap.set({"n", "v"}, "<Space>", "<Nop>", { silent = true })
 if vim.g.vscode then
   -- In VSCode, only load leap and treesitter plugins
   require("lazy").setup({
-     { "ggandor/leap.nvim" },
     { "windwp/nvim-autopairs" },
-    { "kylechui/nvim-surround" },
+    { "ggandor/leap.nvim" },
+    { "kylechui/nvim-surround", config = true },
     { "tpope/vim-commentary" },
     { "szw/vim-maximizer" },
-    { 
-      "echasnovski/mini.ai",
-      config = function()
-        require("mini.ai").setup()
-      end
-    },
     { "lukas-reineke/indent-blankline.nvim" },
     }, {
     change_detection = {
@@ -44,7 +38,7 @@ if vim.g.vscode then
       notify = false,
     },
   })
-else 
+else
   -- In regular Neovim, load all plugins
   require("lazy").setup("plugins", {
     change_detection = {
@@ -57,7 +51,7 @@ end
 if vim.g.vscode then
   -- VSCode extension
   local vscode = require("vscode-neovim")
-  
+
   -- Enable Leap.nvim in VSCode
   require('leap').add_default_mappings()
 
@@ -104,8 +98,8 @@ if vim.g.vscode then
 
   -- Map '>' in visual mode to indent lines
   map('v', '>', function()  vscode.call('editor.action.indentLines') end, { silent = true })
-  
-  -- Map '<' in visual mode to outdent lines  
+
+  -- Map '<' in visual mode to outdent lines
   map('v', '<', function() vscode.call('editor.action.outdentLines') end, { silent = true })
 
   -- LSP features in VSCode
@@ -161,7 +155,7 @@ else
   keymap("n", "<leader>sx", ":close<CR>", opts) -- close split window
   keymap("n", "<leader>sj", "<C-w>-", opts) -- make split window height shorter
   keymap("n", "<leader>sk", "<C-w>+", opts) -- make split windows height taller
-  keymap("n", "<leader>sl", "<C-w>>5", opts) -- make split windows width bigger 
+  keymap("n", "<leader>sl", "<C-w>>5", opts) -- make split windows width bigger
   keymap("n", "<leader>sh", "<C-w><5", opts) -- make split windows width smaller
 
   -- Tab management
@@ -197,7 +191,7 @@ else
   keymap('n', '<leader>fi', "<cmd>lua require('telescope.builtin').lsp_incoming_calls()<CR>", opts) -- fuzzy find LSP/incoming calls
   -- keymap.set('n', '<leader>fm', function() require('telescope.builtin').treesitter({default_text=":method:"}) end) -- fuzzy find methods in current class
   keymap('n', '<leader>fm', "<cmd>lua require('telescope.builtin').treesitter({symbols={'function', 'method'}})<CR>", opts) -- fuzzy find methods in current class
-  keymap('n', '<leader>ft', [[<cmd>lua 
+  keymap('n', '<leader>ft', [[<cmd>lua
     local success, node = pcall(function() return require('nvim-tree.lib').get_node_at_cursor() end)
     if not success or not node then return end;
     require('telescope.builtin').live_grep({search_dirs = {node.absolute_path}})
